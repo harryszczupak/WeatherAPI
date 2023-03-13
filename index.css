@@ -1,0 +1,40 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: url(mountains.jpg);
+	height: 100vh;
+}
+.container {
+	background: rgba(0, 0, 0, 0.9);
+	padding: 2em;
+	border-radius: 1em;
+	width: 100%;
+	max-width: 420px;
+	color: white;
+}
+.search {
+	display: flex;
+	justify-content: center;
+}
+.temp {
+	font-size: xx-large;
+}
+button {
+	margin-left: 0.5em;
+	border-radius: 18px;
+	color: white;
+	background-color: #7c7c7c2b;
+	border: none;
+}
+input {
+	background-color: #7c7c7c2b;
+	padding: 0.5em 1em;
+	border: none;
+	border-radius: 18px;
+	color: white;
+	font-size: 120%;
+}
+.description {
+	margin-top: 2rem;
+}
