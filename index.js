@@ -5,17 +5,24 @@ let weather = {
 		fetch(
 			`https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${this.apiKey}`
 		)
-			.then((res) => res.json())
-			.then((data) => this.diplayWeather(data));
+			.then((res) => {
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw new Error(`${res.status}`);
+				}
+			})
+			.then((data) => this.diplayWeather(data))
+			.catch((Error) => (document.querySelector('h2').innerText = Error));
 	},
-	diplayWeather: function (data) {
+	diplayWeather(data) {
 		const { lon, lat } = data.coord;
 		const { name } = data;
 		const { description } = data.weather[0];
 		const { temp, humidity } = data.main;
 		const celcius = temp - 273.15;
 		const { speed } = data.wind;
-		console.log(lon, lat);
+
 		document.querySelector('h2').innerText = 'Weather in ' + name;
 		document.querySelector('span').innerText = Math.floor(celcius) + '℃';
 		document.querySelector('.description').innerText = description;
@@ -35,8 +42,6 @@ button.addEventListener('click', function () {
 });
 const openMap = document.querySelector('.open_map');
 openMap.addEventListener('click', function () {
-
-
 	const map = window.open(
 		`https://www.google.pl/maps/`,
 		'__self',
