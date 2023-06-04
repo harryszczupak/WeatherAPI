@@ -9,9 +9,20 @@ let weather = {
 				if (res.ok) {
 					return res.json();
 				} else {
+					document.querySelector('h2').textContent = '';
+					document.querySelector('span').textContent = '';
+
+					document.querySelector('.description').textContent = '';
+					document.querySelector('.humidity').textContent = '';
+
+					document.querySelector('.wind').textContent = '';
+
+					document.querySelector('.geolokalization').textContent = '';
+
 					throw new Error(`${res.status}`);
 				}
 			})
+
 			.then((data) => this.diplayWeather(data))
 			.catch((Error) => (document.querySelector('h2').innerText = Error));
 	},
@@ -23,13 +34,14 @@ let weather = {
 		const celcius = temp - 273.15;
 		const { speed } = data.wind;
 
-		document.querySelector('h2').innerText = 'Weather in ' + name;
-		document.querySelector('span').innerText = Math.floor(celcius) + '℃';
-		document.querySelector('.description').innerText = description;
-		document.querySelector('.humidity').innerText =
+		document.querySelector('h2').textContent = 'Weather in ' + name;
+		document.querySelector('span').textContent = Math.floor(celcius) + '℃';
+		document.querySelector('.description').textContent = description;
+		document.querySelector('.humidity').textContent =
 			'humidity: ' + humidity + '%';
-		document.querySelector('.wind').innerText = 'Wind speed: ' + speed + 'km/h';
-		document.querySelector('.geolokalization').innerText =
+		document.querySelector('.wind').textContent =
+			'Wind speed: ' + speed + 'km/h';
+		document.querySelector('.geolokalization').textContent =
 			'height: ' + lat + ', width: ' + lon;
 	},
 	search: function () {
@@ -39,12 +51,4 @@ let weather = {
 
 button.addEventListener('click', function () {
 	weather.search();
-});
-const openMap = document.querySelector('.open_map');
-openMap.addEventListener('click', function () {
-	const map = window.open(
-		`https://www.google.pl/maps/`,
-		'__self',
-		'left= 100 width=500 height=500'
-	);
 });
